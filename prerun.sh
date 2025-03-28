@@ -17,6 +17,6 @@ sudo $PM install -y fail2ban gnupg openssh-server
 # Compression & archiving tools
 sudo $PM install -y zip unzip tar gzip bzip2 xz-utils
 # Other useful tools
-sudo $PM install -y fzf ripgrep bat exa neofetch
+sudo $PM install -y fzf ripgrep bat exa neofetch sudo apt zsh
 
 mkdir -p $USER/.config/nvim

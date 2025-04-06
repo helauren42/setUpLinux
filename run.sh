@@ -17,25 +17,23 @@ sudo apt update -y
 # MyShellEnv
 cd $HOME
 git clone https://github.com/helauren42/.MyShellEnv
-source $HOME/.MyShellEnv/update.sh
+echo "source $HOME/.MyShellEnv/update.sh" >> $HOME/.bashrc
+source $HOME/.bashrc
 
 # Install zsh and set as default shell
 sudo $PM install -y zsh
 chsh -s /bin/zsh
 
-# Ghostty terminal
-cd /opt
-sudo tar xvf ~/Downloads/zig-linux-x86_64-0.13.0.tar.xz
-wget https://github.com/ghostty-org/ghostty/archive/refs/tags/v2.1.3.tar.gz
-tar xvf ~/Downloads/v2.1.3.tar.gz
-cd ghostty-2.1.3
-sudo $PM install -y libgtk-4-dev libadwaita-1-dev
-sudo /opt/zig-linux-x86_64-0.13.0/zig build -p /usr/local -Doptimize=ReleaseFast
+# Alacritty
+sudo add-apt-repository ppa:mmstick76/alacritty
+sudo apt install alacritty -y
+
 
 # Neovim
+rm $HOME/$USER/.config/nvim
 sudo $PM install -y neovim
 cd $HOME/.config
-git clone https://github.com/helauren42/neovimConfig nvim
+git clone git@github.com:helauren42/neovimConfig.git nvim
 
 # Docker
 install_docker_apt() {

@@ -18,7 +18,7 @@ while [[ "$answer" != 'y' && "$answer" != 'Y' ]]; do
   read answer
 done
 
-git clone https://github.com/helauren42/setUpLinux/
+git clone git@github.com:helauren42/setUpLinux.git
 
 cd setUpLinux
 chmod u+x *

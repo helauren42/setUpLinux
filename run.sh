@@ -17,7 +17,7 @@ sudo apt update -y
 # MyShellEnv
 cd $HOME
 git clone https://github.com/helauren42/.MyShellEnv
-echo "source $HOME/.MyShellEnv/update.sh" >> $HOME/.bashrc
+echo "source $HOME/.MyShellEnv/update.sh" >>$HOME/.bashrc
 source $HOME/.bashrc
 
 # Install zsh and set as default shell
@@ -25,9 +25,9 @@ sudo $PM install -y zsh
 chsh -s /bin/zsh
 
 # Alacritty
-sudo add-apt-repository ppa:mmstick76/alacritty
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt update
 sudo apt install alacritty -y
-
 
 # Neovim
 rm $HOME/$USER/.config/nvim

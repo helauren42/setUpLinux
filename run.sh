@@ -36,33 +36,12 @@ sudo $PM install -y zip unzip tar gzip bzip2 xz-utils
 # Other useful tools
 sudo $PM install -y fzf ripgrep bat exa neofetch sudo apt zsh
 
-sudo $PM install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev -y
+sudo $PM install cmake make pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev -y
 
 mkdir -p $USER/.config/nvim
 
 # Keyboard repeat rate (X11)
-xset r rate 230 30 || {
-	echo "xset failed, trying gsettings for GNOME..."
-	gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 33
-	gsettings set org.gnome.desktop.peripherals.keyboard delay 230
-}
-
-# MyShellEnv
-cd $HOME
-git clone https://github.com/helauren42/.MyShellEnv
-echo "source $HOME/.MyShellEnv/update.sh" >>$HOME/.bashrc
-source $HOME/.bashrc
-
-# Install zsh and set as default shell
-sudo $PM install -y zsh
-chsh -s /bin/zsh
-
-# Alacritty
-if [ "$PM" == "apt" ]; then
-	sudo add-apt-repository ppa:neovim-ppa/stable
-	sudo apt update
-	sudo apt install alacritty -y
-fi
+xset r rate 230 30
 
 sudo apt-get update
 
@@ -91,7 +70,6 @@ sudo systemctl enable docker
 # Add current user to docker group to run Docker without sudo (optional)
 sudo usermod -aG docker $USER
 
-# Verify Docker installation
 docker --version
 
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -100,4 +78,28 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker --version
 docker-compose --version
 
-echo "Setup complete!"
+#Font
+
+cp -r jet-brains-mono /usr/share/jet-brains-mono
+sudo fc-cache -fv
+
+# Wezterm
+
+sudo dpkg -i wezterm-nightly.Debian12.deb
+mkdir -p ~/.config
+mv config/wezterm ~/.config/wezterm
+
+# SHELL
+
+# Install zsh and set as default shell
+sudo $PM install -y zsh
+chsh -s /bin/zsh
+
+# MyShellEnv
+cd $HOME
+git clone https://github.com/helauren42/.MyShellEnv
+echo "source $HOME/.MyShellEnv/update.sh" >>$HOME/.bashrc
+echo "source $HOME/.MyShellEnv/update.sh" >>$HOME/.zsshrc
+source ~/bin/zsh
+
+echo "Now add zsh-autosuggestions and syntax highlighting and powerlevel10k and neovim"

@@ -8,7 +8,7 @@ sudo $PM update -y
 
 sudo $PM install git -y
 
-read -p "should a new ssh key be generated? " user_choice
+read -p "should a new ssh key be generated? " answer
 if [[ "$answer" == 'y' && "$answer" == 'Y' ]]; then
 	ssh-keygen
 fi
@@ -95,6 +95,13 @@ mv config/wezterm ~/.config/wezterm
 sudo $PM install -y zsh
 chsh -s /bin/zsh
 
+# install apps waterfox and neovim
+
+mkdir -p apps
+curl --output waterfox.tar https://cdn1.waterfox.net/waterfox/releases/6.5.10/Linux_x86_64/waterfox-6.5.10.tar.bz2
+tar -xvf waterfox.tar -c apps/waterfox
+cp -r apps ~/.local/apps
+
 # MyShellEnv
 cd $HOME
 git clone https://github.com/helauren42/.MyShellEnv
@@ -102,4 +109,4 @@ echo "source $HOME/.MyShellEnv/update.sh" >>$HOME/.bashrc
 echo "source $HOME/.MyShellEnv/update.sh" >>$HOME/.zsshrc
 source ~/bin/zsh
 
-echo "Now add zsh-autosuggestions and syntax highlighting and powerlevel10k and neovim"
+echo "Now install warp-cli, add zsh-autosuggestions and syntax highlighting and powerlevel10k and neovim distro"
